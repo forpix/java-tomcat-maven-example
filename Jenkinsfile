@@ -14,7 +14,7 @@ node{
     
       stage('Deploy') {     
     
-               sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/Tomcat-Testing/target/tomcatdeploymnetdemo.war root@192.168.43.126:/home/softwares'
+               sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/Tomcat-Testing/target/tomcatdeploymnetdemo.war root@10.52.110.114:/home/softwares'
               
           
          
