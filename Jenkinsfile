@@ -17,7 +17,10 @@ node{
             
             
             sshagent(['1c363da2-23b1-42c4-8567-7710f406946c']) {
+                  sh '''
                   whoami;cd /home/softwares;ll -a
+                  
+                 '''
             }
     
             /*  
