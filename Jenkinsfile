@@ -14,7 +14,7 @@ node{
     
       stage('Deploy') { 
             sshagent(['a892a761-cf42-48a5-bd88-eea4bddc68e5']) {
-                  sh 'pwd;ll -a'
+                sh 'scp -o StrictHostKeyChecking=no target/tomcatdeploymnetdemo.war root@10.52.109.2:/home/softwares'
             }
     
             /*  
