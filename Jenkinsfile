@@ -12,14 +12,21 @@ node{
          sh "'${mvnHome}/bin/mvn' test surefire-report:report"
       }  
     
-      stage('Deploy') {     
+      stage('Deploy') { 
+            
+            
+            
+            sshagent(['1c363da2-23b1-42c4-8567-7710f406946c']) {
+                  whoami;cd /home/softwares;ll -a
+            }
     
             /*  
             sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/Tomcat-Testing/target/tomcatdeploymnetdemo.war root@10.52.109.2:/home/softwares'
               
           */
-       sshagent(['1c363da2-23b1-42c4-8567-7710f406946c']) {
-           sh 'scp -O StrictHostKeyChecking=no target/tomcatdeploymnetdemo.war root@10.52.109.2:/home/softwares'
+       /*sshagent(['1c363da2-23b1-42c4-8567-7710f406946c']) {
+           sh 'scp -o StrictHostKeyChecking=no target/tomcatdeploymnetdemo.war root@10.52.109.2:/home/softwares' 
+           */
               
           }
          
