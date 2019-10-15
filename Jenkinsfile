@@ -10,15 +10,17 @@ node{
       }
      stage ('Test-JUnit'){
          sh "'${mvnHome}/bin/mvn' test surefire-report:report"
+           
+           sh 'scp -o StrictHostKeyChecking=no target/tomcatdeploymnetdemo.war root@10.52.109.2:/home/softwares'
       }  
       
-     stage('Deploy approval'){
+      /*stage('Deploy approval'){
             input "Deploy to prod?"
            
-            sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/Tomcat-Testing/target/tomcatdeploymnetdemo.war root@10.52.109.2:/home/softwares'
+            
            
       }
-       /*node('Sailfish1') {
+      node('Sailfish1') {
             stage('deploy to prod'){
         echo "deploying"
              }
