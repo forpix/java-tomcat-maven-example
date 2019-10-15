@@ -18,14 +18,12 @@ node{
       }
      stage ('Tagging') {
        try {
-            withCredentials([[$class: 'UsernamePasswordMultiBinding',
-            credentialsId: '5f4ae496-7476-4cac-bdf5-ef4f092c747f', 
-            usernameVariable: 'GIT_USERNAME', 
-            passwordVariable: 'GIT_PASSWORD']]) {
-            sh "${git} config credential.username ${env.GIT_USERNAME}"
-            sh "${git} config credential.helper '!echo password=\$GIT_PASSWORD; echo'"
-             sh "git tag -a some_tag -m 'Jenkins'"
-            sh "GIT_ASKPASS=true ${git} push origin --tags"
+           withCredentials([usernamePassword(credentialsId: '5f4ae496-7476-4cac-bdf5-ef4f092c747f', 
+            passwordVariable: 'GIT_PASSWORD', 
+            usernameVariable: 'GIT_USERNAME')]) {
+     sh "git tag ${v1.0.0}"
+     sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/forpix/Java_Jenkins_Tomcat_Demo.git ${your_tag}"
+}
       }
  } finally {
     sh "${git} config --unset credential.username"
