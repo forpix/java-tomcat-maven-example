@@ -14,41 +14,41 @@ node{
       stage('Deploy') { 
             sshagent(['663ad901-af44-4f93-803a-c841b0e8588c']) {
              sh 'scp -o StrictHostKeyChecking=no target/tomcatdeploymnetdemo.war root@10.52.109.2:/home/softwares'
-    
-            }
-               
+            }      
       }
+     stage ('Tagging') {
+        withCredentials([[$class: 'UsernamePasswordMultiBinding',
+        credentialsId: '5f4ae496-7476-4cac-bdf5-ef4f092c747f', 
+        usernameVariable: 'GIT_USERNAME', 
+        passwordVariable: 'GIT_PASSWORD']]) {
+        sh("${git} config credential.username ${env.GIT_USERNAME}")
+        sh("${git} config credential.helper '!echo password=\$GIT_PASSWORD; echo'")
+        sh("GIT_ASKPASS=true ${git} push origin --tags")
+        }
+     }
+}
       
-      /*stage('Deploy approval'){
+      /*    stage('Deploy approval'){
             input "Deploy to prod?"
-                
-           
-      }
-      node('Sailfish1') {
+                 }
+        node('Sailfish1') {
             stage('deploy to prod'){
         echo "deploying"
              }
-      }
-    */
-      /* stage('Deploy') { 
+        }
+     stage('Deploy') { 
             sshagent(['a892a761-cf42-48a5-bd88-eea4bddc68e5']) {
-                sh 'scp -o StrictHostKeyChecking=no target/tomcatdeploymnetdemo.war root@10.52.109.2:/home/softwares'
-            } */
-    
-             
-            //sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/Tomcat-Testing/target/tomcatdeploymnetdemo.war root@10.52.109.2:/home/softwares'
-              
-         
-       /*sshagent(['1c363da2-23b1-42c4-8567-7710f406946c']) {
-           sh 'scp -o StrictHostKeyChecking=no target/tomcatdeploymnetdemo.war root@10.52.109.2:/home/softwares' 
-              
+            sh 'scp -o StrictHostKeyChecking=no target/tomcatdeploymnetdemo.war root@10.52.109.2:/home/softwares'
+            }
+            //sh 'scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/Tomcat-Testing/target/tomcatdeploymnetdemo.war root@10.52.109.2:/home/softwares' 
+            sshagent(['1c363da2-23b1-42c4-8567-7710f406946c']) {
+           sh 'scp -o StrictHostKeyChecking=no target/tomcatdeploymnetdemo.war root@10.52.109.2:/home/softwares'    
           } 
-          
                   node {
                   stage('build'){
                      echo "building"
                               }
-                              }
+                        }
                   stage('Deploy approval'){
                    input "Deploy to prod?"
                         }
@@ -56,11 +56,5 @@ node{
                    stage('deploy to prod'){
                    echo "deploying"
                   }
-                        }
-
-          
-          */
-         
-     
-      
- }
+                }
+        */
