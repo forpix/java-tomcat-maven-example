@@ -1,5 +1,5 @@
 node{
-      def mvnHome = tool name: 'maven 3.5.4', type: 'maven' 
+    /*  def mvnHome = tool name: 'maven 3.5.4', type: 'maven' 
       stage('Checkout'){
          git 'https://github.com/forpix/java-tomcat-maven-example'
        
@@ -15,11 +15,15 @@ node{
             sshagent(['663ad901-af44-4f93-803a-c841b0e8588c']) {
              sh 'scp -o StrictHostKeyChecking=no target/tomcatdeploymnetdemo.war root@10.52.109.2:/home/softwares'
             }      
-      }
+      }*/
      stage ('Tagging') {
        withCredentials([usernamePassword(credentialsId: '5f4ae496-7476-4cac-bdf5-ef4f092c747f', 
       passwordVariable: 'GIT_PASSWORD', 
       usernameVariable: 'GIT_USERNAME')]) {
+     sh '''
+     git config --global user.name "mdali"
+      git config --global user.email "mdali@gmail.com"
+     '''
      sh "git tag -a 'v1.0.0'"
      sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/forpix/java-tomcat-maven-example.git --tags"
 }
