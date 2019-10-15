@@ -1,7 +1,7 @@
 node{
       def mvnHome = tool name: 'maven 3.5.4', type: 'maven' 
       stage('Checkout'){
-         git 'https://github.com/forpix/java-tomcat-maven-example' > /dev/null 2>&1
+         git 'https://github.com/forpix/java-tomcat-maven-example' > /dev/null
        
       }  
       stage('Build'){
