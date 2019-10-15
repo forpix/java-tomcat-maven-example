@@ -11,8 +11,12 @@ node{
      stage ('Test-JUnit'){
          sh "'${mvnHome}/bin/mvn' test surefire-report:report"
       }  
-      stage ('Deploy') {
-         sh 'scp -o StrictHostKeyChecking=no target/tomcatdeploymnetdemo.war root@10.52.109.2:/home/softwares/tomcat9/webapps'
+      stage('Deploy') { 
+            sshagent(['663ad901-af44-4f93-803a-c841b0e8588c']) {
+             sh 'scp -o StrictHostKeyChecking=no target/tomcatdeploymnetdemo.war root@10.52.109.2:/home/softwares'
+    
+            }
+               
       }
       
       /*stage('Deploy approval'){
@@ -38,7 +42,24 @@ node{
        /*sshagent(['1c363da2-23b1-42c4-8567-7710f406946c']) {
            sh 'scp -o StrictHostKeyChecking=no target/tomcatdeploymnetdemo.war root@10.52.109.2:/home/softwares' 
               
-          } */
+          } 
+          
+                  node {
+                  stage('build'){
+                     echo "building"
+                              }
+                              }
+                  stage('Deploy approval'){
+                   input "Deploy to prod?"
+                        }
+                   node('Sailfish1') {
+                   stage('deploy to prod'){
+                   echo "deploying"
+                  }
+                        }
+
+          
+          */
          
      
       
