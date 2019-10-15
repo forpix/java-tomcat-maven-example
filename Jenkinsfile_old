@@ -25,12 +25,12 @@ node{
      sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/forpix/Java_Jenkins_Tomcat_Demo.git ${your_tag}"
 }
       }
- } finally {
+  finally {
     sh "${git} config --unset credential.username"
     sh "${git} config --unset credential.helper"
 }
      }
-
+}
       
       /*    stage('Deploy approval'){
             input "Deploy to prod?"
