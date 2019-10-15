@@ -17,14 +17,19 @@ node{
             }      
       }
      stage ('Tagging') {
-        withCredentials([[$class: 'UsernamePasswordMultiBinding',
-        credentialsId: '5f4ae496-7476-4cac-bdf5-ef4f092c747f', 
-        usernameVariable: 'GIT_USERNAME', 
-        passwordVariable: 'GIT_PASSWORD']]) {
-        sh("${git} config credential.username ${env.GIT_USERNAME}")
-        sh("${git} config credential.helper '!echo password=\$GIT_PASSWORD; echo'")
-        sh("GIT_ASKPASS=true ${git} push origin --tags")
-        }
+       try {
+            withCredentials([[$class: 'UsernamePasswordMultiBinding',
+            credentialsId: '5f4ae496-7476-4cac-bdf5-ef4f092c747f', 
+            usernameVariable: 'GIT_USERNAME', 
+            passwordVariable: 'GIT_PASSWORD']]) {
+            sh("${git} config credential.username ${env.GIT_USERNAME}")
+            sh("${git} config credential.helper '!echo password=\$GIT_PASSWORD; echo'")
+            sh("GIT_ASKPASS=true ${git} push origin --tags")
+      }
+ } finally {
+    sh("${git} config --unset credential.username")
+    sh("${git} config --unset credential.helper")
+}
      }
 }
       
