@@ -24,7 +24,7 @@ node{
      git config --global user.name "mdali"
       git config --global user.email "mdali@gmail.com"
      '''
-     sh "git tag -a 'v1.0.0'"
+     sh "git tag -a 'v1.0.0' -m 'testing' "
      sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/forpix/java-tomcat-maven-example.git --tags"
 }
      }
