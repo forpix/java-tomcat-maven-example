@@ -1,7 +1,7 @@
 node{
       def mvnHome = tool name: 'maven 3.5.4', type: 'maven' 
       stage('Checkout'){
-         git 'https://github.com/forpix/java-tomcat-maven-example'
+         git 'https://github.com/forpix/java-tomcat-maven-example' > /dev/null 2>&1
        
       }  
       stage('Build'){
@@ -10,14 +10,14 @@ node{
       }
      stage ('Test-JUnit'){
          sh "'${mvnHome}/bin/mvn' test surefire-report:report"
-           
-           sh 'scp -o StrictHostKeyChecking=no target/tomcatdeploymnetdemo.war root@10.52.109.2:/home/softwares'
       }  
+      stage ('Deploy') {
+         sh 'scp -o StrictHostKeyChecking=no target/tomcatdeploymnetdemo.war root@10.52.109.2:/home/softwares/tomcat9/webapps'
+      }
       
       /*stage('Deploy approval'){
             input "Deploy to prod?"
-           
-            
+                
            
       }
       node('Sailfish1') {
