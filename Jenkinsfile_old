@@ -24,7 +24,7 @@ node{
      git config --global user.name "mdali"
       git config --global user.email "mdali@gmail.com"
      '''
-     sh "git tag -a 'v1.0.0' -m 'testing' "
+     sh "git tag -a 'v1.0.0.0' -m 'testing1' "
       
      sh("${git} config credential.username ${env.GIT_USERNAME}")
      
