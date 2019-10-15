@@ -13,3 +13,4 @@ node{
       stage ('Deploy') {
          sh 'scp -o StrictHostKeyChecking=no target/tomcatdeploymnetdemo.war root@10.52.109.2:/home/softwares/tomcat9/webapps'
       }
+}
