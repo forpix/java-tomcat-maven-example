@@ -21,7 +21,7 @@ node{
            withCredentials([usernamePassword(credentialsId: '5f4ae496-7476-4cac-bdf5-ef4f092c747f', 
             passwordVariable: 'GIT_PASSWORD', 
             usernameVariable: 'GIT_USERNAME')]) {
-     sh "git tag ${v1.0.0}"
+     sh "git tag -a 'Release_1_0'"
      sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/forpix/Java_Jenkins_Tomcat_Demo.git ${your_tag}"
 }
       }
