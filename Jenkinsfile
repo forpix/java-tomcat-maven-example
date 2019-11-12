@@ -11,6 +11,6 @@ node{
          sh "'${mvnHome}/bin/mvn' test surefire-report:report"
       }  
       stage ('Deploy') {
-         sh 'scp -o StrictHostKeyChecking=no target/tomcatdeploymnetdemo.war root@10.52.109.2:/home/softwares/tomcat9/webapps'
+         sh 'scp -o StrictHostKeyChecking=no target/tomcatdeploymnetdemo.war root@10.52.106.73:/home/softwares/tomcat9/webapps'
       }
 }
